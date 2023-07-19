@@ -8,12 +8,10 @@ locals {
 }
 
 generate "provider" {
-  path      = "provider.tf"
+  path      = "provider_override.tf"
   if_exists = "overwrite_terragrunt"
   contents  = <<EOF
-provider "aws" {
-  region = "${local.region}"
-}
+provider "aws" {}
 EOF
 }
 
