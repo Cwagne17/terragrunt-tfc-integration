@@ -9,12 +9,6 @@ jobs:
       - image: alpine/terragrunt:1.5.3
     steps:
       - checkout
-      - aws-cli/setup
-      - run:
-          name: View AWS Creds
-          command: |
-            cat ~/.aws/credentials
-            cat ~/.aws/config
       - run:
           name: Terragrunt Plan
           command: |
