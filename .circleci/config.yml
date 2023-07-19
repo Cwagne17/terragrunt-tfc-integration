@@ -19,6 +19,7 @@ jobs:
       - run:
           name: Terragrunt Plan
           command: |
+            AWS_PROFILE=default \
             TF_TOKEN_app_terraform_io=$TERRAGRUNT_TFC_INTEGRATION_TOKEN \
             terragrunt run-all plan
 
