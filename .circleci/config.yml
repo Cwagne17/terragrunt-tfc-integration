@@ -9,8 +9,7 @@ jobs:
       - image: alpine/terragrunt:1.5.3
     steps:
       - checkout
-      - aws-cli/setup:
-          role-arn: $AWS_ADMIN_OIDC_ROLE
+      - aws-cli/setup
       - run:
           name: View AWS Creds
           command: |
@@ -19,7 +18,6 @@ jobs:
       - run:
           name: Terragrunt Plan
           command: |
-            AWS_PROFILE=default \
             TF_TOKEN_app_terraform_io=$TERRAGRUNT_TFC_INTEGRATION_TOKEN \
             terragrunt run-all plan
 
