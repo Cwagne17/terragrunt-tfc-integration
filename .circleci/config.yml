@@ -19,4 +19,4 @@ workflows:
   continuous-integration:
     jobs:
       - terragrunt-plan:
-          context: [AWS, TFC]
+          context: [TFC]
