@@ -19,7 +19,6 @@ jobs:
       - run:
           name: Terragrunt Plan
           command: |
-            TERRAGRUNT_IAM_ROLE=$AWS_ADMIN_OIDC_ROLE \
             TF_TOKEN_app_terraform_io=$TERRAGRUNT_TFC_INTEGRATION_TOKEN \
             terragrunt run-all plan
 
