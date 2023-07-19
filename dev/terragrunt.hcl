@@ -18,7 +18,7 @@ EOF
 }
 
 generate "remote_state" {
-  path      = "backend.tf"
+  path      = "backend_override.tf"
   if_exists = "overwrite_terragrunt"
   contents  = <<EOF
 terraform {
