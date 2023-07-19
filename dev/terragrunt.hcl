@@ -11,7 +11,9 @@ generate "provider" {
   path      = "provider_override.tf"
   if_exists = "overwrite_terragrunt"
   contents  = <<EOF
-provider "aws" {}
+provider "aws" {
+  region = "${local.region}"
+}
 EOF
 }
 
