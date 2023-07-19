@@ -1,0 +1,25 @@
+version: 2.1
+
+orbs:
+  aws-cli: circleci/aws-cli@4.0.0
+
+jobs:
+  terragrunt-plan:
+    docker:
+      - image: alpine/terragrunt:1.5.3
+    steps:
+      - checkout
+      - aws-cli/assume_role_with_web_identity:
+          role_arn: $AWS_ADMIN_OIDC_ROLE # Need to add this to context
+      - run:
+          name: Terragrunt Plan
+          command: |
+            terragrunt run-all plan
+          environment:
+            TF_TOKEN_app_terraform_io: $TERRAGRUNT_TFC_INTEGRATION_TOKEN
+
+workflows:
+  continuous-integration:
+    jobs:
+      - terragrunt-plan:
+          context: [AWS, TFC]
