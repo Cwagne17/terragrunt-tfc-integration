@@ -15,9 +15,7 @@ jobs:
       - run:
           name: Terragrunt Plan
           command: |
-            terragrunt run-all plan
-          environment:
-            TF_TOKEN_app_terraform_io: $TERRAGRUNT_TFC_INTEGRATION_TOKEN
+            TF_TOKEN_app_terraform_io=$TERRAGRUNT_TFC_INTEGRATION_TOKEN terragrunt run-all plan
 
 workflows:
   continuous-integration:
