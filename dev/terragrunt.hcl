@@ -13,7 +13,6 @@ generate "provider" {
   contents  = <<EOF
 provider "aws" {
   region = "${local.region}"
-  profile="default"
 }
 EOF
 }
@@ -23,6 +22,13 @@ generate "remote_state" {
   if_exists = "overwrite_terragrunt"
   contents  = <<EOF
 terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "4.36.0"
+    }
+  }
+
   backend "remote" {
       hostname     = "${local.tfc_hostname}"
       organization = "${local.tfc_organization}"
