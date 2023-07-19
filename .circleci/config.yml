@@ -10,7 +10,7 @@ jobs:
     steps:
       - checkout
       - aws-cli/setup:
-          role_arn: $AWS_ADMIN_OIDC_ROLE
+          role-arn: $AWS_ADMIN_OIDC_ROLE
       - run:
           name: View AWS Creds
           command: |
