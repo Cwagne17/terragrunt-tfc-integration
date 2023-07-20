@@ -7,10 +7,18 @@ include "root" {
 // Imports the environment specific configuration
 // this only loads the data as a variable
 // without merging the configurations
-include "env" {
+/* include "env" {
   path           = find_in_parent_folders("env.hcl")
   expose         = true
   merge_strategy = "no_merge"
+} */
+
+dependency "vpc" {
+  config_path = "${get_terragrunt_dir()}/../vpc"
+
+  mock_outputs = {
+    public_subnets = ["subnet-12345678"]
+  }
 }
 
 // Imports the abstracted EC2 configuration
@@ -19,14 +27,6 @@ include "env" {
 include "ec2" {
   path   = "${get_terragrunt_dir()}/../../_env/ec2.hcl"
   expose = true
-}
-
-dependency "vpc" {
-  config_path = "${get_terragrunt_dir()}/../vpc"
-
-  mock_outputs = {
-    public_subnets = ["subnet-12345678"]
-  }
 }
 
 // Defines the terraform module to use
@@ -41,17 +41,19 @@ terraform {
 // The auto.tfvars file is used to provide the inputs
 // the file however is written to disc and should not be
 // checked into source control 
-generate "tfvars" {
+/* generate "tfvars" {
   path              = "terragrunt.auto.tfvars"
   if_exists         = "overwrite"
   disable_signature = true
   contents          = <<-EOF
-ami = "ami-06ca3ca175f37dd66"
-instance_type = "t2.micro"
-
-name = "my-ec2-instance"
+name = "${include.ec2.locals.name}"
 
 subnet_id = ${dependency.vpc.outputs.public_subnets[0]}
 associate_public_ip_address = true
 EOF
-}
+} */
+
+
+generate = read_terragrunt_config("config.hcl", {
+  environment = "dev"
+})

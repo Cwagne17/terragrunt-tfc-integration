@@ -12,6 +12,7 @@ jobs:
       - run:
           name: Terragrunt Validate
           command: |
+            TF_TOKEN_app_terraform_io=$TERRAGRUNT_TFC_INTEGRATION_TOKEN \
             terragrunt run-all validate
 
   terragrunt-plan:
@@ -25,8 +26,20 @@ jobs:
             TF_TOKEN_app_terraform_io=$TERRAGRUNT_TFC_INTEGRATION_TOKEN \
             terragrunt run-all plan
 
+  terragrunt-apply:
+    docker:
+      - image: alpine/terragrunt:1.5.3
+    steps:
+      - checkout
+      - run:
+          name: Terragrunt Apply
+          command: |
+            TF_TOKEN_app_terraform_io=$TERRAGRUNT_TFC_INTEGRATION_TOKEN \
+            terragrunt run-all apply
+
 workflows:
   continuous-integration:
     jobs:
+      - terragrunt-validate
       - terragrunt-plan:
           context: [TFC]
