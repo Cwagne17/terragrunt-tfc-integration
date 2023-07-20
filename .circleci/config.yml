@@ -18,6 +18,7 @@ jobs:
   terragrunt-plan:
     docker:
       - image: alpine/terragrunt:1.5.3
+    parallelism: 2
     steps:
       - checkout
       - run:
