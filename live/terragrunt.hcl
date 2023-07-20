@@ -2,19 +2,9 @@ locals {
   tfc_hostname     = "app.terraform.io"
   tfc_organization = "Personal-GH"
 
-  module      = path_relative_to_include()                          # this will find the name of the module aka. "vpc"
+  module      = reverse(split("/", path_relative_to_include()))[0]  # this will find the name of the module aka. "vpc"
   environment = reverse(split("/", get_parent_terragrunt_dir()))[0] # this will find the name of the folder aka. "dev"
   region      = "us-east-1"
-}
-
-generate "provider" {
-  path      = "provider_override.tf"
-  if_exists = "overwrite_terragrunt"
-  contents  = <<EOF
-provider "aws" {
-  region = "${local.region}"
-}
-EOF
 }
 
 generate "remote_state" {
@@ -36,6 +26,16 @@ terraform {
           name = "${local.module}-${local.environment}-${local.region}"
       }
   }
+}
+EOF
+}
+
+generate "provider" {
+  path      = "provider_override.tf"
+  if_exists = "overwrite_terragrunt"
+  contents  = <<EOF
+provider "aws" {
+  region = "${local.region}"
 }
 EOF
 }
