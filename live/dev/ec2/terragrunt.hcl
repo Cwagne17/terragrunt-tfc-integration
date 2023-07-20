@@ -48,7 +48,7 @@ generate "tfvars" {
   disable_signature = true
   contents          = <<-EOF
 name = "${include.ec2.locals.name}"
-subnet_id = ${dependency.vpc.outputs.public_subnets[0]}
+subnet_id = "${dependency.vpc.outputs.public_subnets[0]}"
 associate_public_ip_address = true
 EOF
 }
