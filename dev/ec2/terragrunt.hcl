@@ -18,15 +18,7 @@ dependency "vpc" {
   }
 }
 
-inputs = {
-  name                        = "my-ec2-instance"
-  ami                         = "ami-06ca3ca175f37dd66"
-  instance_type               = "t2.micro"
-  subnet_id                   = dependency.vpc.outputs.public_subnets[0]
-  associate_public_ip_address = true
-}
-
-/* generate "tfvars" {
+generate "tfvars" {
   path              = "terragrunt.auto.tfvars"
   if_exists         = "overwrite"
   disable_signature = true
@@ -39,4 +31,4 @@ name = "my-ec2-instance"
 subnet_id = ""
 associate_public_ip_address = true
 EOF
-} */
+}
