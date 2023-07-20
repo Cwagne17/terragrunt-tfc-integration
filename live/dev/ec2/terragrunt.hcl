@@ -16,6 +16,7 @@ include "root" {
 dependency "vpc" {
   config_path = "${get_terragrunt_dir()}/../vpc"
 
+  mock_outputs_allowed_terraform_commands = ["validate", "plan"]
   mock_outputs = {
     public_subnets = ["subnet-12345678"]
   }
