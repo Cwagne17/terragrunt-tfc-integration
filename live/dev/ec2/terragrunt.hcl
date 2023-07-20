@@ -23,7 +23,7 @@ include "ec2" {
 
 // Defines the terraform module to use
 terraform {
-  source = "${include.env.locals.source_base_url}?version=4.5.0"
+  source = "${include.ec2.locals.source_base_url}?version=4.5.0"
 }
 
 // Inputs block cannot be used with terraform cloud
