@@ -2,8 +2,8 @@ locals {
   tfc_hostname     = "app.terraform.io"
   tfc_organization = "Personal-GH"
 
-  module      = reverse(split("/", path_relative_to_include()))[0]  # this will find the name of the module aka. "vpc"
-  environment = reverse(split("/", get_parent_terragrunt_dir()))[1] # this will find the name of the folder aka. "dev"
+  module      = reverse(split("/", path_relative_to_include()))[0] # this will find the name of the module aka. "vpc"
+  environment = split("/", get_parent_terragrunt_dir())[1]         # this will find the name of the folder aka. "dev"
   region      = "us-east-1"
 }
 

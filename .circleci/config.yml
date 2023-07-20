@@ -40,6 +40,7 @@ jobs:
 workflows:
   continuous-integration:
     jobs:
-      - terragrunt-validate
+      - terragrunt-validate:
+          context: [TFC]
       - terragrunt-plan:
           context: [TFC]
