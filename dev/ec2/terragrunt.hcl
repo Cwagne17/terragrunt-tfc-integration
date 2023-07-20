@@ -10,6 +10,14 @@ dependencies {
   paths = ["../vpc"]
 }
 
+dependency "vpc" {
+  config_path = "../vpc"
+
+  mock_outputs = {
+    public_subnets = ["subnet-12345678"]
+  }
+}
+
 inputs = {
   name                        = "my-ec2-instance"
   ami                         = "ami-06ca3ca175f37dd66"
