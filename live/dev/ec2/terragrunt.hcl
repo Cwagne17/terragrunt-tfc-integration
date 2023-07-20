@@ -41,7 +41,7 @@ terraform {
 // The auto.tfvars file is used to provide the inputs
 // the file however is written to disc and should not be
 // checked into source control 
-/* generate "tfvars" {
+generate "tfvars" {
   path              = "terragrunt.auto.tfvars"
   if_exists         = "overwrite"
   disable_signature = true
@@ -50,6 +50,4 @@ name = "${include.ec2.locals.name}"
 subnet_id = ${dependency.vpc.outputs.public_subnets[0]}
 associate_public_ip_address = true
 EOF
-} */
-
-generate = read_terragrunt_config("config.hcl")
+}
