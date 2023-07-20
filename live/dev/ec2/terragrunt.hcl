@@ -21,6 +21,14 @@ include "ec2" {
   expose = true
 }
 
+dependency "vpc" {
+  config_path = "${get_terragrunt_dir()}/../vpc"
+
+  mock_outputs = {
+    public_subnets = ["subnet-12345678"]
+  }
+}
+
 // Defines the terraform module to use
 terraform {
   source = "${include.ec2.locals.source_base_url}?version=4.5.0"

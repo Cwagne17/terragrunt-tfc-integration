@@ -4,6 +4,16 @@ orbs:
   aws-cli: circleci/aws-cli@3.1.4
 
 jobs:
+  terragrunt-validate:
+    docker:
+      - image: alpine/terragrunt:1.5.3
+    steps:
+      - checkout
+      - run:
+          name: Terragrunt Validate
+          command: |
+            terragrunt run-all validate
+
   terragrunt-plan:
     docker:
       - image: alpine/terragrunt:1.5.3
