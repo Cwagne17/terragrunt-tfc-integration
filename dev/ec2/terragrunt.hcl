@@ -1,5 +1,5 @@
 terraform {
-  source = "tfr:///terraform-aws-modules/ec2-instance/aws?version=5.2.1"
+  source = "tfr:///terraform-aws-modules/ec2-instance/aws?version=4.5.0"
 }
 
 include "root" {
